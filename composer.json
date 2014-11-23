@@ -2,8 +2,6 @@
     "require": {
         "php": ">=5.3.3",
         "zendframework/zendframework": "~2.3.1",
-        "zendframework/zend-developer-tools": "dev-master",
-        "zendframework/zftool": "dev-master",
         "doctrine/doctrine-orm-module": "~0.8.0",
         "doctrine/migrations": "dev-master",
         "imagine/imagine": "~0.5.0",
