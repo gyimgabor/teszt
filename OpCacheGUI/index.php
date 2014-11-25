@@ -25,12 +25,12 @@ use OpCacheGUI\Network\RouteFactory;
 /**
  * Bootstrap the library
  */
-require_once __DIR__ . '/src/OpCacheGUI/bootstrap.php';
+require_once __DIR__ . 'src/OpCacheGUI/bootstrap.php';
 
 /**
  * Setup the environment
  */
-require_once __DIR__ . '/init.deployment.php';
+require_once __DIR__ . 'init.deployment.php';
 
 /**
  * Start the session
