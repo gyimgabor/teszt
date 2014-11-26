@@ -29,7 +29,8 @@ class Module
     {
         return array(	
             'aliases' => array(
-                'Doctrine\ORM\EntityManager' => 'doctrine.entitymanager.orm_default',
+                'EntityManager' => 'Doctrine\ORM\EntityManager',
+                //'Doctrine\ORM\EntityManager' => 'doctrine.entitymanager.orm_default',
             ),	
         );
     }
