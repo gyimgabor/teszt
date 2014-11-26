@@ -44,7 +44,7 @@ return array(
                 'metadata_cache'    => 'apc',
                 'query_cache'       => 'apc',
                 'result_cache'      => 'apc',
-                'generate_proxies'  => true,
+                'generate_proxies'  => false,
                 'proxy_dir'         => 'data/DoctrineORMModule/Proxy',
                 'proxy_namespace'   => 'DoctrineORMModule\Proxy',
             )

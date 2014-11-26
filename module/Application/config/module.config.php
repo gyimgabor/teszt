@@ -1,5 +1,6 @@
 <?php
 
+namespace Application;
 return array(
     'router' => array(
         'routes' => array(
@@ -322,6 +323,14 @@ return array(
         ),
         'template_path_stack' => array(
             __DIR__ . '/../view',
+        ),
+    ),
+                   
+    'doctrine' => array(
+        'driver' => array(
+            'Database_driver' => array(
+                'paths' => array(__DIR__ . '/../src/' . __NAMESPACE__ . '/Mapping')
+            ),
         ),
     ),
     // Placeholder for console routes
