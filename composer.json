@@ -1,10 +1,23 @@
 {
-    "require": {
-        "php": ">=5.3.3",
-        "zendframework/zendframework": "~2.3.1",
-        "doctrine/doctrine-orm-module": "~0.8.0",
-        "doctrine/migrations": "dev-master",
-        "imagine/imagine": "~0.5.0",
-        "dwoo/dwoo": "dev-beta"
-    }
+  "require": {
+    "php": ">=5.3.3",
+    "zendframework/zendframework": "~2.3.1",
+    "doctrine/doctrine-orm-module": "~0.8.0",
+    "doctrine/migrations": "dev-master",
+    "imagine/imagine": "~0.5.0",
+    "dwoo/dwoo": "dev-beta",
+    "pear-pear.php.net/http_request2": "*",
+    "pear-pear.php.net/mail_mime": "*",
+    "pear-pear.php.net/mail_mimedecode": "*"
+  },
+  "require-dev": {
+    "microsoft/windowsazure": "*"
+  },
+  "repositories": 
+    [ 
+      { 
+        "type": "pear", 
+        "url": "http://pear.php.net" 
+      } 
+    ]
 }
