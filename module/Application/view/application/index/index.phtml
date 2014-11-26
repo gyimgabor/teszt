@@ -42,3 +42,13 @@
         </div>
     </div>
 </div>
+
+<?php foreach($result as $res) : ?>
+<?php /* @var $res \Database\Entity\Data */ ?>
+
+<div class="row">
+    <div class="col-md-4">
+      <?php echo $res->getName()?>
+    </div>
+</div>
+<?php endforeach; ?>

@@ -18,7 +18,7 @@ use Database\Entity\Data;
 class IndexController extends AbstractActionController
 {
   
-  
+  /*
   public function keyGenerator($minlength=8, $maxlength=8, $uselower = true, $useupper = true, $usenumbers = true, $usespecial = false) { 
         $charset = '';
         if ($uselower)   $charset .= 'abcdefghijklmnopqrstuvwxyz'; 
@@ -35,7 +35,7 @@ class IndexController extends AbstractActionController
             $key .= $charset[(mt_rand(0,(strlen($charset)-1)))]; 
         }
         return $key; 
-    }
+    }*/
   
     public function indexAction()
     {
@@ -43,9 +43,10 @@ class IndexController extends AbstractActionController
       /* @var $em \Doctrine\ORM\EntityManager */
       
       $dataRepo = $em->getRepository('Database\Entity\Data');
+      /* @var $dataRepo \Doctrine\ORM\EntityRepository */
       
       /*
-      for($i=0; $i<10000; $i++){
+      for($i=0; $i<100; $i++){
         $data = new Data();
         $data->setName($this->keyGenerator(30,30));
         
@@ -67,11 +68,23 @@ class IndexController extends AbstractActionController
       }
       $em->flush();
       */
+      
+      
+      $qb = $dataRepo->createQueryBuilder('data');
+      
+      $a1 = new \DateTime();
+      $a2 = new \DateTime(date('Y-m-d H:i:s',strtotime('2012-12-01')));
+      
+      $result = $qb->select()->where('data.date_a <= \''.date('Y-m-d H:i:s',strtotime('2014-01-01')).'\'')
+              ->andWhere('data.date_a >= \''.date('Y-m-d H:i:s',strtotime('2012-08-01')).'\'')
+              ->orderBy('data.date_b')->getQuery()->getResult();
+      
+
       $bcrypt = new Bcrypt();
-      $bcrypt->setCost(10);
-      return $bcrypt->verify('', '');
+      $bcrypt->setCost(7);
+      $bcrypt->verify('asdasdasd', '$2y$07$8uo6xyypvUS2s9Pk/tydLeY6iei0QHUO8Dr797w3m4MqRo.IzYGC6');
       
-      
+      return array('result' => $result);
       
     }
 }
