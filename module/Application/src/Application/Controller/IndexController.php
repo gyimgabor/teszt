@@ -77,7 +77,7 @@ class IndexController extends AbstractActionController
       
       $result = $qb->select()->where('data.date_a <= \''.date('Y-m-d H:i:s',strtotime('2014-01-01')).'\'')
               ->andWhere('data.date_a >= \''.date('Y-m-d H:i:s',strtotime('2012-08-01')).'\'')
-              ->orderBy('data.date_b')->getQuery()->getResult();
+              ->orderBy('data.date_b')->getQuery()->setMaxResults(1000)->getResult();
       
 
       $bcrypt = new Bcrypt();

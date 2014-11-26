@@ -50,5 +50,11 @@
     <div class="col-md-4">
       <?php echo $res->getName()?>
     </div>
+    <div class="col-md-4">
+      <?php echo $res->getDateA()->format('Y.m.d.')?>
+    </div>
+    <div class="col-md-4">
+      <?php echo $res->getDateB()->format('Y.m.d.')?>
+    </div>
 </div>
 <?php endforeach; ?>
