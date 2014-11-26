@@ -1,11 +1,4 @@
 <?php
-/**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/ZendSkeletonApplication for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- */
 
 return array(
     'router' => array(
@@ -19,55 +12,294 @@ return array(
                         'action'     => 'index',
                     ),
                 ),
-            ),
-            // The following is a route to simplify getting started creating
-            // new controllers and actions without needing to create a new
-            // module. Simply drop new controllers in, and you can access them
-            // using the path /application/:controller/:action
-            'application' => array(
-                'type'    => 'Literal',
-                'options' => array(
-                    'route'    => '/application',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Application\Controller',
-                        'controller'    => 'Index',
-                        'action'        => 'index',
-                    ),
-                ),
+                
                 'may_terminate' => true,
                 'child_routes' => array(
-                    'default' => array(
+/* Public routing */
+                    'about' => array(
+                        'type'    => 'Literal',
+                        'options' => array(
+                            'route'    => 'about',
+                            'defaults' => array(
+                                'action' => 'about',
+                            ),
+                        ),
+                    ),
+                    'registration' => array(
+                        'type'    => 'Literal',
+                        'options' => array(
+                            'route'    => 'registration',
+                            'defaults' => array(
+                                'controller' => 'registration',
+                                'action' => 'index',
+                            ),
+                        ),
+                    ),
+                    'confirmation' => array(
                         'type'    => 'Segment',
                         'options' => array(
-                            'route'    => '/[:controller[/:action]]',
+                            'route'    => 'confirmation/:code',
                             'constraints' => array(
-                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'code'    => '[0-9A-Za-z]+',
                             ),
                             'defaults' => array(
+                                'controller' => 'registration',
+                                'action' => 'confirmation',
+                            ),
+                        ),
+                    ),
+                    'login' => array(
+                        'type'    => 'Literal',
+                        'options' => array(
+                            'route'    => 'login',
+                            'defaults' => array(
+                                'controller' => 'profile',
+                                'action' => 'login',
+                            ),
+                        ),
+                    ),
+                    'logout' => array(
+                        'type'    => 'Literal',
+                        'options' => array(
+                            'route'    => 'logout',
+                            'defaults' => array(
+                                'controller' => 'profile',
+                                'action' => 'logout',
+                            ),
+                        ),
+                    ),
+/* Public POST only routing */
+                    'post' => array(
+                        'type'    => 'Method',
+                        'priority' => 100,
+                        'options' => array(
+                            'verb'    => 'post',
+                        ),
+                        'child_routes' => array(
+                            'registration' => array(
+                                'type'    => 'Literal',
+                                'options' => array(
+                                    'route'    => 'registration',
+                                    'defaults' => array(
+                                        'controller' => 'registration',
+                                        'action' => 'registration',
+                                    ),
+                                ),
+                            ),
+                            'confirmation' => array(
+                                'type'    => 'Literal',
+                                'options' => array(
+                                    'route'    => 'confirmation',
+                                    'defaults' => array(
+                                        'controller' => 'registration',
+                                        'action' => 'confirming',
+                                    ),
+                                ),
+                            ),
+                            'login' => array(
+                                'type'    => 'Literal',
+                                'options' => array(
+                                    'route'    => '/login',
+                                    'defaults' => array(
+                                        'controller' => 'profile',
+                                        'action' => 'loginProcess',
+                                    ),
+                                ),
+                            ),
+                        ),
+                    ),
+/* Profile routing */
+                    'client' => array(
+                        'type'    => 'Literal',
+                        'options' => array(
+                            'route'    => 'client',
+                            'defaults' => array(
+                                'controller' => 'profile',
+                                'action' => 'profile',//'dashboard',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                        'child_routes' => array(
+                            'profile' => array(
+                                'type'    => 'Literal',
+                                'options' => array(
+                                    'route'    => '/profile',
+                                    'defaults' => array(
+                                        'action' => 'profile',
+                                    ),
+                                ),
+                            ),
+                            'account' => array(
+                                'type'    => 'Literal',
+                                'options' => array(
+                                    'route'    => '/account',
+                                    'defaults' => array(
+                                        'action' => 'account',
+                                    ),
+                                ),
+                            ),
+                            'statistics' => array(
+                                'type'    => 'Literal',
+                                'options' => array(
+                                    'route'    => '/statistics',
+                                    'defaults' => array(
+                                        'action' => 'statistics',
+                                    ),
+                                ),
+                            ),
+                            'billing' => array(
+                                'type'    => 'Literal',
+                                'options' => array(
+                                    'route'    => '/billing',
+                                    'defaults' => array(
+                                        'action' => 'billing',
+                                    ),
+                                ),
+                            ),
+/* Profile POST only routing */
+                            'post' => array(
+                                'type'    => 'Method',
+                                'priority' => 100,
+                                'options' => array(
+                                    'verb'    => 'post',
+                                ),
+                                'child_routes' => array(
+                                    'new-domain' => array(
+                                        'type'    => 'Literal',
+                                        'options' => array(
+                                            'route'    => '/ndomain',
+                                            'defaults' => array(
+                                                'action' => 'newDomain',
+                                            ),
+                                        ),
+                                    ),
+                                    'new-fbpage' => array(
+                                        'type'    => 'Literal',
+                                        'options' => array(
+                                            'route'    => '/nfbpage',
+                                            'defaults' => array(
+                                                'action' => 'newFbpage',
+                                            ),
+                                        ),
+                                    ),
+                                    'delete-domain' => array(
+                                        'type'    => 'Literal',
+                                        'options' => array(
+                                            'route'    => '/ddomain',
+                                            'defaults' => array(
+                                                'action' => 'deleteDomain',
+                                            ),
+                                        ),
+                                    ),
+                                    'delete-fbpage' => array(
+                                        'type'    => 'Literal',
+                                        'options' => array(
+                                            'route'    => '/dfbpage',
+                                            'defaults' => array(
+                                                'action' => 'deleteFbpage',
+                                            ),
+                                        ),
+                                    ),
+                                    'send-activation-code' => array(
+                                        'type'    => 'Literal',
+                                        'options' => array(
+                                            'route'    => '/sac',
+                                            'defaults' => array(
+                                                'action' => 'sendActivationCode',
+                                            ),
+                                        ),
+                                    ),
+                                    'confirm-activation' => array(
+                                        'type'    => 'Literal',
+                                        'options' => array(
+                                            'route'    => '/cac',
+                                            'defaults' => array(
+                                                'action' => 'confirmActivationCode',
+                                            ),
+                                        ),
+                                    ),
+                                    'billing' => array(
+                                        'type'    => 'Literal',
+                                        'options' => array(
+                                            'route'    => '/billing',
+                                            'defaults' => array(
+                                                'action' => 'billingSave',
+                                            ),
+                                        ),
+                                    ),
+                                ),
+                            ),
+/* Subscription routing */
+                            'subscription' => array(
+                                'type'    => 'Literal',
+                                'options' => array(
+                                    'route'    => '/subscription',
+                                    'defaults' => array(
+                                        'controller' => 'subscription',
+                                        'action' => 'index',
+                                    ),
+                                ),
+                                'may_terminate' => true,
+                                'child_routes' => array(
+                                    'post' => array(
+                                        'type'    => 'Method',
+                                        'priority' => 100,
+                                        'options' => array(
+                                            'verb'    => 'post',
+                                        ),
+                                        'child_routes' => array(
+                                            'data' => array(
+                                                'type'    => 'Literal',
+                                                'options' => array(
+                                                    'route'    => '/data',
+                                                    'defaults' => array(
+                                                        'action' => 'data',
+                                                    ),
+                                                ),
+                                            ),
+                                            'upsell' => array(
+                                                'type'    => 'Literal',
+                                                'options' => array(
+                                                    'route'    => '/upsell',
+                                                    'defaults' => array(
+                                                        'action' => 'upsell',
+                                                    ),
+                                                ),
+                                            ),
+                                            'confirmation' => array(
+                                                'type'    => 'Literal',
+                                                'options' => array(
+                                                    'route'    => '/confirmation',
+                                                    'defaults' => array(
+                                                        'action' => 'confirmation',
+                                                    ),
+                                                ),
+                                            ),
+                                            'finish' => array(
+                                                'type'    => 'Literal',
+                                                'options' => array(
+                                                    'route'    => '/finish',
+                                                    'defaults' => array(
+                                                        'action' => 'finish',
+                                                    ),
+                                                ),
+                                            ),
+                                        ),
+                                    ),
+                                    'history' => array(
+                                        'type'    => 'Literal',
+                                        'options' => array(
+                                            'route'    => '/history',
+                                            'defaults' => array(
+                                                'action' => 'history',
+                                            ),
+                                        ),
+                                    ),
+                                ),
                             ),
                         ),
                     ),
                 ),
-            ),
-        ),
-    ),
-    'service_manager' => array(
-        'abstract_factories' => array(
-            'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
-            'Zend\Log\LoggerAbstractServiceFactory',
-        ),
-        'aliases' => array(
-            'translator' => 'MvcTranslator',
-        ),
-    ),
-    'translator' => array(
-        'locale' => 'en_US',
-        'translation_file_patterns' => array(
-            array(
-                'type'     => 'gettext',
-                'base_dir' => __DIR__ . '/../language',
-                'pattern'  => '%s.mo',
             ),
         ),
     ),
