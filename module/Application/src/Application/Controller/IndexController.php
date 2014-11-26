@@ -44,7 +44,7 @@ class IndexController extends AbstractActionController
       
       $dataRepo = $em->getRepository('Database\Entity\Data');
       
-      
+      /*
       for($i=0; $i<10000; $i++){
         $data = new Data();
         $data->setName($this->keyGenerator(30,30));
@@ -64,12 +64,9 @@ class IndexController extends AbstractActionController
         $data->setDateB(new \DateTime(date('Y-m-d H:i:s',$time)));
         
         $em->persist($data);
-        if($i % 100 == 0){
-      $em->flush();
-        }
       }
       $em->flush();
-      
+      */
       $bcrypt = new Bcrypt();
       $bcrypt->setCost(10);
       return $bcrypt->verify('', '');
