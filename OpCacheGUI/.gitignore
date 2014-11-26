@@ -1,5 +1,0 @@
-/public/.htaccess
-init.*.php
-vendor
-!/init.deployment.php
-!/init.example.php
