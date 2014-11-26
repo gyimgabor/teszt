@@ -62,7 +62,7 @@ $uriScheme = Router::QUERY_STRING;
  */
 $login = [
     'username'  => 'admin',
-    'password'  => password_hash('admin'),
+    'password'  => password_hash('admin',PASSWORD_DEFAULT),
     'whitelist' => [
         '*',
     ],
