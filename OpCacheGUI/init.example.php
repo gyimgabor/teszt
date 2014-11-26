@@ -41,7 +41,7 @@ $translator = new FileTranslator(__DIR__ . '/texts', 'en');
 /**
  * Setup URI scheme (url rewrites [Router::URL_REWRITE] / query strings [Router::QUERY_STRING])
  */
-$uriScheme = Router::URL_REWRITE;
+$uriScheme = Router::QUERY_STRING;
 
 /**
  * Login credentials
