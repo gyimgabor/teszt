@@ -23,18 +23,17 @@ return array(
     // ...
 
     
-    //'public_dir' => 'public',
 
     'doctrine' => array(
         'connection' => array(
             'orm_default' => array(
-                'driverClass' => 'Doctrine\DBAL\Driver\PDOSqlsrv\Driver',
+                'driverClass' => 'Doctrine\DBAL\Driver\PDOSqlsrv\Driver', // PDOSqlsrv: MSSQL PHP PDO Driver
                 'params' => array(
-                    'host'     => 'lzkb5j4ld0.database.windows.net',
-                    'port'     => '1433',
-                    'user'     => 'gabor',
-                    'password' => 'Mystro!9',
-                    'dbname'   => 'webapptAdWLpCnKh',
+                    'host'     => '<xxx>.database.windows.net',
+                    'port'     => '',
+                    'user'     => '',
+                    'password' => '',
+                    'dbname'   => '',
                     'charset'  => 'UTF8' 
                 )
             )
