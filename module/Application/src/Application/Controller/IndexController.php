@@ -87,4 +87,10 @@ class IndexController extends AbstractActionController
       return array('result' => $result);
       
     }
+    
+    
+    public function index2Action()
+    {
+      return array();
+    }
 }
